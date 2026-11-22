@@ -1,582 +1,156 @@
 ---
-import Layout from '../layouts/Layout.astro';
----
-
-<script>
-    const header = document.querySelector("header");
-    const sectionOne = document.querySelector(".home-intro");
-
-    const faders = document.querySelectorAll(".fade-in");
-    const sliders = document.querySelectorAll(".slide-in");
-
-    const sectionOneOptions = {
-        rootMargin: "-200px 0px 0px 0px"
-    };
-
-    const sectionOneObserver = new IntersectionObserver(function (
-            entries,
-            sectionOneObserver
-        ) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    header.classList.add("nav-scrolled");
-                } else {
-                    header.classList.remove("nav-scrolled");
-                }
-            });
-        },
-        sectionOneOptions);
-
-    sectionOneObserver.observe(sectionOne);
-
-    const appearOptions = {
-        threshold: 0,
-        rootMargin: "0px 0px -250px 0px"
-    };
-
-    const appearOnScroll = new IntersectionObserver(function (
-            entries,
-            appearOnScroll
-        ) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                } else {
-                    entry.target.classList.add("appear");
-                    appearOnScroll.unobserve(entry.target);
-                }
-            });
-        },
-        appearOptions);
-
-    faders.forEach(fader => {
-        appearOnScroll.observe(fader);
-    });
-
-    sliders.forEach(slider => {
-        appearOnScroll.observe(slider);
-    });
-
-   function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-        let date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
-}
-
-function getCookie(name) {
-    let nameEQ = name + "=";
-    let ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-}
-
-
-function showCookieButton() {
-    let cookieButton = document.getElementById('cookieButton');
-    let cookieDiv = document.getElementById('cookieDiv');
-    if (!getCookie('myCookie')) {
-        cookieButton.style.display = 'block';
-        cookieDiv.style.display = 'flex';
-    } else {
-        cookieButton.style.display = 'none';
-        cookieDiv.style.display = 'none';
-    }
-}
-
-
-let cookieButton = document.getElementById('cookieButton');
-cookieButton.addEventListener('click', function () {
-    setCookie('myCookie', 'cookieValue', 365);
-    showCookieButton();
-});
-
-// Проверка на наличие куки при загрузке страницы
-window.onload = function () {
-    if (getCookie('myCookie')) {
-        showCookieButton();
-    }
+// Temporary one-page landing (21.11.2026). Full site comes later.
+const PHONE = '(213) 468-0080';
+const TEL = '+12134680080';
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Wolf Stove Repair',
+  url: 'https://wolfstove.repair/',
+  telephone: TEL,
+  image: 'https://wolfstove.repair/images/wolf-range-repair-1600.webp',
+  description: 'Independent repair service for Wolf ranges, ovens, rangetops, cooktops, microwaves and hoods in Los Angeles, Orange and Ventura counties.',
+  areaServed: ['Los Angeles County, CA', 'Orange County, CA', 'Ventura County, CA'],
+  address: { '@type': 'PostalAddress', addressRegion: 'CA', addressCountry: 'US' },
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '18:00' }],
 };
-</script>
-
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Wolf Stove Repair",
-        "image": "img/wolf-stove-repair-services.webp",
-        "@id": "",
-        "url": "",
-        "telephone": "2134680080",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "816 Bartlett St",
-            "addressLocality": "Los Angeles",
-            "postalCode": "90012",
-            "addressCountry": ""
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 34.06259111188187,
-            "longitude": -118.24823518654867
-        },
-        "areaServed": {
-            "@type": "GeoCircle",
-            "geoMidpoint": {
-                "@type": "GeoCoordinates",
-                "latitude": 34.06259111188187,
-                "longitude": -118.24823518654867
-            },
-            "geoRadius": 80400
-        },
-        "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-                "Sunday"
-            ],
-            "opens": "00:00",
-            "closes": "23:59"
-        }
-    }
-</script>
-
-<Layout>
-    <div class="tiledBackground4">
-        <div
-                id="top"
-                class="top"
-        >
-            <h2 style="margin: 0">WOLF STOVE REPAIR</h2>
-            <p
-                    style="
-          color: #ffffff;
-          font-weight: 900;
-          font-family: 'Ubuntu', sans-serif;
-          font-size: 2em;
-          text-align: center;
-          text-shadow: #5d0394 2px 0 20px;
-          margin: 0;
-        "
-            >
-                <a class="phone" style="color: #ffffff" href="tel:+12134680080"
-                >+1 (213) 468-0080</a
-                >
-            <div
-                    class="link-top"
-                    style="display: flex; justify-content: center; gap: 15px"
-            >
-                <a aria-label="Call Us" href="tel:+12134680080" class="button-85"
-                >&nbsp;&nbsp;&nbsp;CALL US&nbsp;&nbsp;</a
-                >
-                <a aria-label="Book Us" href="/book" class="button-85"
-                >&nbsp;&nbsp;BOOK US&nbsp;</a
-                >
-            </div>
-        </div>
-
-        <div id="topblock" style="height: 4em;"></div>
-        <div class="main">
-            <div class="maintext">
-                <div class="main-right">
-                    <div class="main-right__top">
-                        <div class="main-right__top-text">
-                            <h4>Текст заголовок</h4>
-                            <p> Quasi autem perspiciatis dicta fugit, dolorum unde atque necessitatibus!</p>
-                            <h4>Текст заголовок</h4>
-                            <p> Quasi autem perspiciatis dicta fugit, dolorum unde atque necessitatibus!</p>
-                            <h4>Текст заголовок</h4>
-                            <p> Quasi autem perspiciatis dicta fugit, dolorum unde atque necessitatibus!</p>
-                        </div>
-                        <img class="main-img" src="/images/logo.webp" alt="logo"/>
-                    </div>
-                    <h4>Текст заголовок</h4>
-                    <p> Quasi autem perspiciatis dicta fugit, dolorum unde atque necessitatibus!</p>
-                    <h4>Текст заголовок</h4>
-                    <p> Quasi autem perspiciatis dicta fugit, dolorum unde atque necessitatibus!</p>
-                </div>
-            </div>
-        </div>
-        <div class="menu">
-            <a style="--clr: #7808d0" class="button" href="#price-list">
-          <span class="button__icon-wrapper">
-            <svg
-                    width="10"
-                    class="button__icon-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 15"
-            >
-              <path
-                      fill="currentColor"
-                      d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-              ></path>
-            </svg>
-
-            <svg
-                    class="button__icon-svg button__icon-svg--copy"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    fill="none"
-                    viewBox="0 0 14 15"
-            >
-              <path
-                      fill="currentColor"
-                      d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-              ></path>
-            </svg>
-          </span>
-                Price List
-            </a>
-
-            <a style="--clr: #7808d0" class="button" href="#wolf-stove-repair">
-          <span class="button__icon-wrapper">
-            <svg
-                    width="10"
-                    class="button__icon-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 15"
-            >
-              <path
-                      fill="currentColor"
-                      d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-              ></path>
-            </svg>
-
-            <svg
-                    class="button__icon-svg button__icon-svg--copy"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    fill="none"
-                    viewBox="0 0 14 15"
-            >
-              <path
-                      fill="currentColor"
-                      d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-              ></path>
-            </svg>
-          </span>
-                Repair
-            </a>
-            <a style="--clr: #7808d0" class="button" href="#wolf-stove-instalation">
-          <span class="button__icon-wrapper">
-            <svg
-                    width="10"
-                    class="button__icon-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 15"
-            >
-              <path
-                      fill="currentColor"
-                      d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-              ></path>
-            </svg>
-
-            <svg
-                    class="button__icon-svg button__icon-svg--copy"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    fill="none"
-                    viewBox="0 0 14 15"
-            >
-              <path
-                      fill="currentColor"
-                      d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-              ></path>
-            </svg>
-          </span>
-                Installation
-            </a>
-            <a style="--clr: #7808d0" class="button" href="#wolf-stove-cleaning">
-          <span class="button__icon-wrapper">
-            <svg
-                    width="10"
-                    class="button__icon-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 15"
-            >
-              <path
-                      fill="currentColor"
-                      d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-              ></path>
-            </svg>
-
-            <svg
-                    class="button__icon-svg button__icon-svg--copy"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    fill="none"
-                    viewBox="0 0 14 15"
-            >
-              <path
-                      fill="currentColor"
-                      d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-              ></path>
-            </svg>
-          </span>
-                Cleaning
-            </a>
-        </div>
-    </div>
-
-    <div class="home-about">
-        <div class="columns">
-            <div class="col fade-in">
-                <h3
-                        style="
-              color: white !important;
-              margin: 0 auto;
-              text-align: center;
-            "
-                >
-                    Wolf Range Repair
-                </h3>
-                <img src="/images/columns-1.webp" alt="img"/>
-                <a class="columns-book" href="#">BOOK US</a>
-            </div>
-            <div class="col fade-in">
-                <h3
-                        style="
-              color: white !important;
-              margin: 0 auto;
-              text-align: center;
-            "
-                >
-                    Wolf Oven Repair
-                </h3>
-                <img src="./images/columns-2.webp" alt="img"/>
-                <a class="columns-book" href="#">BOOK US</a>
-            </div>
-            <div class="col fade-in">
-                <h3
-                        style="
-              color: white !important;
-              margin: 0 auto;
-              text-align: center;
-            "
-                >
-                    Wolf Cooktop Repair
-                </h3>
-                <img src="/images/columns-3.webp" alt="img"/>
-                <a class="columns-book" href="#">BOOK US</a>
-            </div>
-            <div class="col fade-in">
-                <h3
-                        style="
-              color: white !important;
-              margin: 0 auto;
-              text-align: center;
-            "
-                >
-                    Wolf Hood Repair
-                </h3>
-                <img src="/images/columns-4.webp" alt="img"/>
-                <a class="columns-book" href="#">BOOK US</a>
-            </div>
-            <div class="col fade-in">
-                <h3
-                        style="
-              color: white !important;
-              margin: 0 auto;
-              text-align: center;
-            "
-                >
-                    Wolf Grill Repair
-                </h3>
-                <img src="/images/columns-5.webp" alt="img"/>
-                <a class="columns-book" href="#">BOOK US</a>
-            </div>
-            <div class="col fade-in">
-                <h3
-                        style="
-              color: white !important;
-              margin: 0 auto;
-              text-align: center;
-            "
-                >
-                    Wolf Microwave Repair
-                </h3>
-                <img src="/images/columns-6.webp" alt="img"/>  
-                <a class="columns-book" href="#">BOOK US</a>
-            </div>
-            <div class="col fade-in">
-                <h3
-                        style="
-              color: white !important;
-              margin: 0 auto;
-              text-align: center;
-            "
-                >
-                    Wolf Drawer Repair
-                </h3>
-                <img src="/images/columns-7.webp" alt="img"/>
-                <a class="columns-book" href="#">BOOK US</a>
-            </div>
-            <div class="col fade-in">
-                <h3
-                        style="
-              color: white !important;
-              margin: 0 auto;
-              text-align: center;
-            "
-                >
-                    Wolf Rangetops Repair
-                </h3>
-                <img src="/images/columns-8.webp" alt="img"/>
-                <a class="columns-book" href="#">BOOK US</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="tiledBackground5">
-        <div id="price-list"></div>
-        <div class="maintext problems">
-            <div class="problems-item">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ex.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ex.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ex.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ex.</p>
-            </div>
-            <div class="problems-item">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ex.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ex.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ex.</p>
-            </div>
-        </div>
-        <div class="more-stuff-grid more-item">
-            <div class="more-stuff-grid-wrapper">
-                <img src="/images/columns-1.webp" alt="img" class="slide-in from-left"/>
-                <div class="more-stuff-grid-text slide-in from-right">
-                    <h3>Текст текст</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis fugit,
-                        quae beatae vero sit magni quaerat id ratione. Dolor optio unde amet
-                        omnis sapiente neque cumque consequuntur reiciendis deserunt.
-                        Dolorem vero exercitationem consequuntur, eligendi cupiditate
-                        debitis facilis quibusdam magni. Eveniet.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="more-stuff-grid more-item">
-            <div class="more-stuff-grid-wrapper grid-revers">
-                <div class="more-stuff-grid-text slide-in from-left">
-                    <h3>Текст текст</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis fugit,
-                        quae beatae vero sit magni quaerat id ratione. Dolor optio unde amet
-                        omnis sapiente neque cumque consequuntur reiciendis deserunt.
-                        Dolorem vero exercitationem consequuntur, eligendi cupiditate
-                        debitis facilis quibusdam magni. Eveniet.
-                    </p>
-                </div>
-                <img src="/images/columns-1.webp" alt="img" class="slide-in from-right"/>
-            </div>
-        </div>
-        <div class="more-stuff-grid more-item">
-            <div class="more-stuff-grid-wrapper">
-                <img src="/images/columns-1.webp" alt="img" class="slide-in from-left"/>
-                <div class="more-stuff-grid-text slide-in from-right">
-                    <h3>Текст текст</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis fugit,
-                        quae beatae vero sit magni quaerat id ratione. Dolor optio unde amet
-                        omnis sapiente neque cumque consequuntur reiciendis deserunt.
-                        Dolorem vero exercitationem consequuntur, eligendi cupiditate
-                        debitis facilis quibusdam magni. Eveniet.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="more-stuff-grid more-item">
-            <div class="more-stuff-grid-wrapper grid-revers">
-                <div class="more-stuff-grid-text slide-in from-left">
-                    <h3>Текст текст</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis fugit,
-                        quae beatae vero sit magni quaerat id ratione. Dolor optio unde amet
-                        omnis sapiente neque cumque consequuntur reiciendis deserunt.
-                        Dolorem vero exercitationem consequuntur, eligendi cupiditate
-                        debitis facilis quibusdam magni. Eveniet.
-                    </p>
-                </div>
-                <img src="/images/columns-1.webp" alt="img" class="slide-in from-right"/>
-            </div>
-        </div>
-        <div class="more-stuff-grid more-item">
-            <div class="more-stuff-grid-wrapper">
-                <img src="/images/columns-1.webp" alt="img" class="slide-in from-left"/>
-                <div class="more-stuff-grid-text slide-in from-right">
-                    <h3>Текст текст</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis fugit,
-                        quae beatae vero sit magni quaerat id ratione. Dolor optio unde amet
-                        omnis sapiente neque cumque consequuntur reiciendis deserunt.
-                        Dolorem vero exercitationem consequuntur, eligendi cupiditate
-                        debitis facilis quibusdam magni. Eveniet.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="tiledBackground6">
-        <div id="wolf-stove-repair"></div>
-        <div class="maintext" style="margin: 0 auto">
-            <h2 style="text-align: center;">Areas we service:</h2>
-            <p style="line-height: 150%;">Los Angeles | Beverly Hills | Orange County | Malibu | Bel Air | Calabasas |
-                Encino | Tarzana | Sherman Oaks | Westwood | Santa Monica | Pacific Palisades | Brentwood | Wilshire |
-                Topanga | Ventura County | Santa Barbara | Montecito | Oxnard | Carpinteria | Camarillo | Newbury Park |
-                Thousand Oaks | Westlake Village | Agoura Hills | Simi Valley | Hidden Hills | Woodland Hills | West
-                Hills |
-                Canoga Park | Chatsworth | Porter Ranch | Granada Hills | Valencia | Santa Clarita | Valley Village |
-                Northridge | North Hollywood | Toluca Lake | Hollywood | Burbank | Glendale | Silver Lake | DTLA |
-                Atwater
-                Village | Pasadena | Altadena | La Crescenta | Montrose | Rolling Hills | Rancho Palos Verdes | Redondo
-                Beach | Venice Beach | Hermosa Beach | Manhattan Beach | El Segundo | Torrance | Marina Del Rey | Culver
-                City | Century City | West Hollywood | Newport Beach | Laguna Niguel | Dana Point | Coto De Caza</p>
-        </div>
-        <div
-                class="link-top"
-                style="display: flex; justify-content: center; gap: 15px; margin-top: 20px"
-        >
-            <a aria-label="Call Us" href="tel:+12134680080" class="button-85"
-            >&nbsp;&nbsp;&nbsp;CALL US&nbsp;&nbsp;</a
-            >
-            <a aria-label="Book Us" href="/book" class="button-85"
-            >&nbsp;&nbsp;BOOK US&nbsp;</a
-            >
-        </div>
-    </div>
-
-    <!--has to be somewhere on the page otherwise animation does not work-->
-    <section class="home-intro">
-        <h2>Intersection Observer is pretty useful</h2>
-    </section>
-        <div class="cookie" id="cookieDiv">
-        <p>This site uses <a href="">cookies.</a>
-        </p>
-        <button class="cookie-button" type="button" id="cookieButton">
-            Accept cookies
-        </button>
-    </div>
-</Layout>
-
-<style>
-
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wolf Range, Oven and Cooktop Repair in Los Angeles | Wolf Stove Repair</title>
+<meta name="description" content="Wolf range, oven, rangetop, cooktop, microwave and hood repair in Los Angeles, Orange and Ventura counties. Call (213) 468-0080.">
+<link rel="canonical" href="https://wolfstove.repair/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wolf Stove Repair">
+<meta property="og:title" content="Wolf Range, Oven and Cooktop Repair in Los Angeles">
+<meta property="og:description" content="Wolf range, oven, rangetop, cooktop, microwave and hood repair in Los Angeles, Orange and Ventura counties.">
+<meta property="og:url" content="https://wolfstove.repair/">
+<meta property="og:image" content="https://wolfstove.repair/images/wolf-range-repair-1600.webp">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VM56LQL45"></script>
+<script is:inline>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VM56LQL45');</script>
+<script type="application/ld+json" set:html={JSON.stringify(ld)}></script>
+<style is:inline>
+:root{--ink:#222;--grey:#666;--line:#e3e3e3;--soft:#f4f2ef;--red:#b5121b;--dark:#1d1d1d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:#fff;line-height:1.6;font-size:17px}
+.sans,header,.btn,.facts,footer,.mbar{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:62px;gap:12px}
+.logo{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:15px;text-decoration:none}
+.logo span{color:var(--red)}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:11px 22px;border-radius:3px;white-space:nowrap}
+.btn.line{background:transparent;color:#fff;border:1px solid #fff}
+.hero{position:relative;color:#fff;min-height:520px;display:flex;align-items:center;background:var(--dark)}
+.hero picture,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.25))}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-top:70px;padding-bottom:70px}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:400;line-height:1.12;max-width:13em}
+.hero p{font-size:19px;max-width:30em;margin:16px 0 26px;color:#eee}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.facts{background:var(--soft)}
+.facts .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding-top:26px;padding-bottom:26px;text-align:center;font-size:15px;color:var(--grey)}
+.facts b{display:block;color:var(--ink);font-size:18px}
+section{padding:64px 0}
+h2{font-size:clamp(26px,3.4vw,34px);font-weight:400;margin-bottom:18px}
+.lead{max-width:40em;color:var(--grey);margin-bottom:30px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 36px}
+.grid div{border-top:1px solid var(--line);padding:18px 0}
+.grid h3{font-size:20px;font-weight:400;margin-bottom:4px}
+.grid p{color:var(--grey);font-size:15px}
+.dark{background:var(--dark);color:#fff}
+.dark .lead{color:#bbb}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+ol.steps{list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;padding:14px 0 14px 52px;position:relative;border-top:1px solid #333}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:12px;width:34px;height:34px;border:1px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
+.call{text-align:center}
+.call a.big{display:block;font-size:clamp(34px,6vw,52px);text-decoration:none;margin:6px 0 18px}
+.note{font-size:13px;color:var(--grey);margin-top:22px}
+footer{border-top:1px solid var(--line);padding:26px 0 90px;font-size:13px;color:var(--grey)}
+.mbar{display:none}
+@media (max-width:820px){
+ .grid,.two,.facts .wrap{grid-template-columns:1fr}
+ .hero{min-height:460px}
+ header .btn{padding:9px 12px;font-size:14px}
+ .mbar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:6}
+ .mbar a{display:block;text-align:center;background:var(--red);color:#fff;font-weight:700;padding:16px;text-decoration:none}
+}
 </style>
+</head>
+<body>
+<header><div class="wrap">
+ <a class="logo" href="/">Wolf <span>Stove</span> Repair</a>
+ <a class="btn" href={`tel:${TEL}`}>Call {PHONE}</a>
+</div></header>
+
+<div class="hero">
+ <picture>
+  <source type="image/webp" srcset="/images/wolf-range-repair-800.webp 800w, /images/wolf-range-repair-1600.webp 1600w" sizes="100vw">
+  <img src="/images/wolf-range-repair-1600.webp" width="1600" height="900" alt="Technician repairing a professional stainless steel range in a home kitchen" fetchpriority="high">
+ </picture>
+ <div class="wrap">
+  <h1>Wolf range, oven and cooktop repair</h1>
+  <p>We fix Wolf ranges, wall ovens, rangetops, cooktops, microwaves and hoods in your kitchen, across Los Angeles, Orange and Ventura counties.</p>
+  <div class="ctas sans"><a class="btn" href={`tel:${TEL}`}>Call {PHONE}</a><a class="btn line" href="#how">How it works</a></div>
+ </div>
+</div>
+
+<div class="facts"><div class="wrap">
+ <div><b>Gas, dual-fuel and induction</b>all Wolf cooking lines</div>
+ <div><b>Monday to Saturday</b>technicians out 8 AM to 6 PM</div>
+ <div><b>Price agreed first</b>no work before you say yes</div>
+</div></div>
+
+<section><div class="wrap">
+ <h2>What we repair</h2>
+ <p class="lead">Every Wolf cooking appliance still in service, from older dual-fuel ranges to current induction and steam models.</p>
+ <div class="grid">
+  <div><h3>Ranges</h3><p>Gas and dual-fuel ranges: burners, igniters, oven elements, convection fans, temperature control.</p></div>
+  <div><h3>Wall ovens</h3><p>E Series and M Series ovens that will not heat, run hot, show error codes or have door and lock problems.</p></div>
+  <div><h3>Rangetops and cooktops</h3><p>Gas, electric and induction: burners that click and will not light, low flame, dead induction zones.</p></div>
+  <div><h3>Steam and speed ovens</h3><p>Convection steam ovens and speed ovens: water, steam, heating and control faults.</p></div>
+  <div><h3>Microwaves and drawers</h3><p>Microwave drawers, built-in microwaves and warming drawers.</p></div>
+  <div><h3>Ventilation hoods</h3><p>Fans, lights and controls on wall, island and insert hoods.</p></div>
+ </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+ <h2>Common problems we see</h2>
+ <div class="grid">
+  <div><h3>Burner clicks, will not light</h3><p>Igniters, spark modules, wet or dirty burner heads.</p></div>
+  <div><h3>Oven will not heat</h3><p>Bake and broil elements, gas igniters, safety valves, sensors.</p></div>
+  <div><h3>Temperature is off</h3><p>Temperature sensors and controls; the oven runs too hot or too cold.</p></div>
+  <div><h3>Error code on the display</h3><p>Control boards, sensors and wiring behind the fault code.</p></div>
+  <div><h3>Convection fan noise</h3><p>Worn fan motors and bearings.</p></div>
+  <div><h3>Door will not close or lock</h3><p>Hinges, gaskets, latches and door locks.</p></div>
+ </div>
+</div></section>
+
+<section class="dark" id="how"><div class="wrap two">
+ <div><h2>How a repair works</h2><p class="lead">One call, one technician at your door, one price agreed before any work.</p></div>
+ <ol class="steps">
+  <li>Call us with the model and what the appliance is doing.</li>
+  <li>We schedule a visit, often the same or next day.</li>
+  <li>The technician finds the cause and quotes one price.</li>
+  <li>You approve, we repair and test before we leave.</li>
+ </ol>
+</div></section>
+
+<section class="call"><div class="wrap">
+ <h2>Wolf appliance not working?</h2>
+ <p class="lead" style="margin:0 auto">Call and tell us the model and the problem.</p>
+ <a class="big" href={`tel:${TEL}`}>{PHONE}</a>
+ <a class="btn" href={`tel:${TEL}`}>Call now</a>
+ <p class="note sans">Wolf Stove Repair is an independent repair service. We are not affiliated with Wolf or Sub-Zero Group, Inc. Wolf is a trademark of its owner, used here only to describe the appliances we repair.</p>
+</div></section>
+
+<footer><div class="wrap">Wolf Stove Repair · Los Angeles, Orange and Ventura counties · <a href={`tel:${TEL}`}>{PHONE}</a> · Monday to Saturday, 8 AM to 6 PM</div></footer>
+<div class="mbar"><a href={`tel:${TEL}`}>Call {PHONE}</a></div>
+</body>
+</html>

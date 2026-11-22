@@ -3,6 +3,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://astro-cube.vercel.app/',
-  integrations: [sitemap()],
+  site: 'https://wolfstove.repair/',
+  integrations: [sitemap({ filter: (page) => !page.includes('google') })],
 });
